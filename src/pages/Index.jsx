@@ -1,7 +1,7 @@
-import Banner from '../components/Banner';
-import ProductList from './../../public/foods.json';
-
 import Item from './../components/Item';
+import Banner from '../components/Banner';
+
+import ProductList from './../../public/foods.json';
 
 const Index = () => {
 

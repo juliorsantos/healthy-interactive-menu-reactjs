@@ -6,6 +6,7 @@ import { Context, ContextWrapper } from './context/AppContext';
 
 import Index from './pages/Index';
 import Product from './pages/Product';
+import Cart from './pages/Cart';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css'
@@ -22,6 +23,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Index />} />
           <Route path='/products/:id' element={<Product />} />
+          <Route path='/cart' element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </ContextWrapper>

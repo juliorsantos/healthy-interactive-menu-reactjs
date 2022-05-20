@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../context/AppContext";
 import LANGS from './../assets/languages.json';
@@ -20,6 +20,12 @@ const Header = () => {
     return;
   }
 
+  const getCartCount = () => {
+    if(!state.cart.length) return 0;
+
+    return state.cart.reduce((prev, curr) => prev + curr.qty, 0);
+  }
+
   return (
     <nav className="navbar navbar-expand-lg bg-light header">
       <div className="container-fluid d-flex">
@@ -31,7 +37,7 @@ const Header = () => {
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link to="/cart" className="nav-link">
-              🛒 <span className="cart-count">{state.cart.length}</span>
+              🛒 <span className="cart-count">{ getCartCount() }</span>
             </Link>
           </li>
           <li className="nav-item dropdown">

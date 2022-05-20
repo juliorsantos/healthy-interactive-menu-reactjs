@@ -8,40 +8,38 @@ const reducers = (state, action) => {
           language: action.payload
         }
       };
-      break;
     case 'ADD_CART':
-      /**
-       * If does not have any products
-       */
-      if (!state.cart.length) {
-        const newPayload = action.payload;
-        newPayload.qty = 1;
-        state.cart.push(newPayload);
-        return state;
+      const checkProduct = state.cart.filter(item => item.id === action.payload.id);
+
+      if (!checkProduct[0]) {
+        action.payload.qty = 1;
+        state.cart.push(action.payload);
+        return {
+          ...state
+        }
       }
 
-      /**
-       * Else... add product
-       */
-      const newState = state.cart.map((item, index) => {
+      const newCartList = state.cart.map((item, index) => {
         if (item.id === action.payload.id) {
           return {
             ...item,
-            qty: parseInt(item.qty) + 1
+            qty: item.qty + 1
           }
         } else {
           return item;
         }
       })
 
-      return {
-        ...state,
-        cart: newState
-      };
-      break;
+      if (!newCartList) {
+        return state;
+      }
+
+      return { ...state, cart: newCartList };
+    case 'ORDER':
+      state.cart = [];
+      return { ...state }
     default:
       return state;
-      break;
   }
 }
 

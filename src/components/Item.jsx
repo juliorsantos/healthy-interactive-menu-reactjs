@@ -1,12 +1,13 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from './../context/AppContext';
 import LANGS from './../assets/languages.json';
+import { toast } from "react-toastify";
 
 const Item = ({ data }) => {
 
-  const [state, dispatch] = useContext(Context);
   const navigator = useNavigate();
+  const [state, dispatch] = useContext(Context);
 
   function moneyFormatter(price = 0) {
     if (!state.app.language || !price) return price;
@@ -24,6 +25,16 @@ const Item = ({ data }) => {
     return Intl.NumberFormat(sign, { style: 'currency', currency: currency.style }).format(price);
   }
 
+  const addToCart = (data) => {
+    if(!data || !data.id) {
+      toast.error('Error on adding the product.');
+    }
+
+    toast.success('Added to the cart!');
+    dispatch({ type: 'ADD_CART', payload: data });
+    return;
+  }
+
   return (
     <div className="product-item">
       <div className="image-wrapper">
@@ -39,7 +50,7 @@ const Item = ({ data }) => {
           ℹ Details
         </button>
         <button
-          onClick={() => dispatch({ type: 'ADD_CART', payload: data })}
+          onClick={() => addToCart(data)}
           className='flex-fill m-1 btn btn-success'
           type='button'>
           🛒 Order

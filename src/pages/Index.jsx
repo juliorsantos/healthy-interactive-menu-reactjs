@@ -2,11 +2,13 @@ import Item from './../components/Item';
 import Banner from '../components/Banner';
 
 import ProductList from './../../public/foods.json';
+import Header from '../components/Header';
 
 const Index = () => {
 
   return (
     <>
+      <Header />
       <Banner />
       <div className="container py-2">
         <h1 className='text-center py-4'>Order our delicious food</h1>

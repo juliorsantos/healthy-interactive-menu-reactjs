@@ -8,22 +8,16 @@ const Item = ({ data }) => {
   const [state, dispatch] = useContext(Context);
   const navigator = useNavigate();
 
-  function moneyFormatter(price) {
-    // console.log(LANGS);
-    if(!state.app.language) return price;
-    // After we will move and change it.
+  function moneyFormatter(price = 0) {
+    if (!state.app.language || !price) return price;
 
     const currencyFilter = LANGS.filter(item => item.sign === state.app.language);
 
-    if(!currencyFilter.length) return price;
+    if (!currencyFilter.length) return price;
 
     const { sign, currency } = currencyFilter[0];
-    console.log(currency);
-    console.log(sign);
-    // return price;
-    
-    // return Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
-    if(currency.exchangeRate) {
+
+    if (currency.exchangeRate) {
       price = price * currency.exchangeRate
     }
 
@@ -44,7 +38,10 @@ const Item = ({ data }) => {
           type='button'>
           ℹ Details
         </button>
-        <button className='flex-fill m-1 btn btn-success' type='button'>
+        <button
+          onClick={() => dispatch({ type: 'ADD_CART', payload: data })}
+          className='flex-fill m-1 btn btn-success'
+          type='button'>
           🛒 Order
         </button>
       </div>

@@ -3,8 +3,12 @@ import Banner from '../components/Banner';
 
 import ProductList from './../../public/foods.json';
 import Header from '../components/Header';
+import { useEffect } from 'react';
 
 const Index = () => {
+
+  useEffect(() => {
+  }, [])
 
   return (
     <>

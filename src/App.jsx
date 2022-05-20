@@ -7,6 +7,9 @@ import { Context, ContextWrapper } from './context/AppContext';
 import Index from './pages/Index';
 import Product from './pages/Product';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css'
+
 const App = () => {
 
   const ctx = useContext(Context);
@@ -14,6 +17,7 @@ const App = () => {
 
   return (
     <ContextWrapper value={ reducer }>
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Index />} />

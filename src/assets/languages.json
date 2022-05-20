@@ -1,0 +1,25 @@
+[
+  {
+    "sign": "pt-BR",
+    "name": "Brazil",
+    "currency": {
+      "style": "BRL",
+      "exchangeRate": 4.88
+    }
+  },
+  {
+    "sign": "es-MX",
+    "name": "México",
+    "currency": {
+      "style": "MXN",
+      "exchangeRate": 19.86
+    }
+  },
+  {
+    "sign": "en-US",
+    "name": "United State",
+    "currency": {
+      "style": "USD"
+    }
+  }
+]

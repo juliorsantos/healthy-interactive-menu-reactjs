@@ -1,6 +1,47 @@
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../context/AppContext";
 
-const Header = () => {
+const Header = (props) => {
+
+  const [state, dispatch] = useContext(Context);
+
+  const LANGS = [
+    {
+      "sign": "pt-BR",
+      "name": "Brazil",
+      "currency": {
+        "style": "BRL"
+      }
+    },
+    {
+      "sign": "es-MX",
+      "name": "México",
+      "currency": {
+        "style": "MXN"
+      }
+    },
+    {
+      "sign": "en-US",
+      "name": "United State",
+      "currency": {
+        "style": "USD"
+      }
+    },
+  ]
+
+  const getAppLang = () => {
+    if(!state.app.language) {
+      return 'Select your location';
+    }
+
+    return LANGS.filter(item => item.sign === state.app.language)[0].name;
+  }
+
+  const setAppLang = (lang) => {
+    dispatch({ type: 'SET_LANGUAGE', payload: lang });
+    return;
+  }
 
   return (
     <nav className="navbar navbar-expand-lg bg-light">
@@ -13,12 +54,17 @@ const Header = () => {
         <ul className="navbar-nav">
           <li className="nav-item dropdown">
             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Select your location
+              { getAppLang() }
             </a>
             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a className="dropdown-item" href="#">Brazil</a></li>
-              <li><a className="dropdown-item" href="#">Mexico</a></li>
-              <li><a className="dropdown-item" href="#">United State</a></li>
+              {LANGS.map((item, key) => (
+                <li key={key}>
+                  <a
+                    onClick={() => setAppLang(item.sign)}
+                    className="dropdown-item"
+                    href="#">{ item.name }</a>
+                </li>
+              ))}
             </ul>
           </li>
         </ul>

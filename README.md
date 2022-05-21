@@ -33,6 +33,9 @@ Then run the dev server
 - [x] Improve the frontend
 - [x] Add ContextAPI and Reducers
 - [x] Multiple and single pages for product showing
-- [ ] Add API actions for CRUD (JSON SERVER)
+- [x] Search products on main banner (shared state)
+- [x] Add API actions for CRUD (JSON SERVER)
+
+Maybe...
 - [ ] Currency API for converting the prices
-- [ ] WhatsApp or Telegram 
+- [ ] Send the order to WhatsApp or Telegram 

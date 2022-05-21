@@ -9,7 +9,7 @@ const Banner = () => {
           <h1>Become healthier.</h1>
           <h5>Order here. Now!</h5>
         </div>
-        <div className="input-group">
+        <div className="input-group d-none">
           <input
             type="text"
             className="form-control" />

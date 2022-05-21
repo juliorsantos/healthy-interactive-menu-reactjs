@@ -1,4 +1,4 @@
-# GoodFood - Your health food online
+# GoodFood - Your healthy food online
 You can order your healthy food :)
 
 I recommend that you use `json-server` to provide you a backend.

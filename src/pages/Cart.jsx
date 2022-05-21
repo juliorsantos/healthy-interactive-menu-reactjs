@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import Header from '../components/Header';
@@ -18,15 +18,35 @@ const Cart = () => {
   }
 
   const finishOrder = () => {
+    if (!state.cart) {
+      toast.error('First, add a product on your cart.');
+      return;
+    }
+
+    setTotalPrice(0);
     toast.success('Ordered with successful.');
     dispatch({ type: 'ORDER' });
     return;
   }
 
   useEffect(() => {
-    const calcTotalPrice = state.cart.reduce((prev, curr) => prev + (curr.price * curr.qty), 0);
-    setTotalPrice(calcTotalPrice)
+    if (state.cart.length) {
+      const calcTotalPrice = state.cart.reduce((prev, curr) => prev + (curr.price * curr.qty), 0);
+      setTotalPrice(calcTotalPrice)
+    }
   }, [])
+
+  if (!state.cart.length) {
+    return (
+      <>
+        <Header />
+        <div className="container text-center py-5">
+          <h5>What do you think to add a<br />delicious food on your cart?</h5>
+          <Link to="/" className="btn btn-success my-4">Let's go</Link>
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
@@ -60,12 +80,12 @@ const Cart = () => {
             <tfoot>
               <tr>
                 <td colSpan={4}>Total</td>
-                <td>{ getPrice(totalPrice) }</td>
+                <td>{getPrice(totalPrice)}</td>
               </tr>
             </tfoot>
           </table>
 
-          {state.cart && (
+          {state.cart.length && (
             <div className="w-100 d-flex justify-content-end">
               <div className="btn-group">
                 <button className="btn btn-sm btn-primary" onClick={() => navigator('/')}>

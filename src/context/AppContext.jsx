@@ -1,9 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 
 const DEFAULT_STATE = {
-  app: {
-    language: 'en-US'
-  },
+  app: [],
   cart: []
 }
 

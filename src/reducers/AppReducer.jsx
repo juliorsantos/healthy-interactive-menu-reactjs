@@ -5,7 +5,7 @@ const reducers = (state, action) => {
       return {
         ...state,
         app: {
-          language: action.payload
+          locale: action.payload
         }
       };
     case 'ADD_CART':

@@ -1,20 +1,32 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import Header from '../components/Header';
+import { currencyFormatter } from './../lib/Currency';
 import { Context } from "../context/AppContext";
 
 const Cart = () => {
 
   const navigator = useNavigate();
+
   const [state, dispatch] = useContext(Context);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const getPrice = (price) => {
+    return currencyFormatter(price, state.app.locale);
+  }
 
   const finishOrder = () => {
     toast.success('Ordered with successful.');
     dispatch({ type: 'ORDER' });
     return;
   }
+
+  useEffect(() => {
+    const calcTotalPrice = state.cart.reduce((prev, curr) => prev + (curr.price * curr.qty), 0);
+    setTotalPrice(calcTotalPrice)
+  }, [])
 
   return (
     <>
@@ -39,12 +51,18 @@ const Cart = () => {
                   <td>{item.id}</td>
                   <td>{item.name}</td>
                   <td>{item.qty}</td>
-                  <td>{item.price}</td>
-                  <td>{item.qty * parseFloat(item.price)}</td>
+                  <td>{getPrice(item.price)}</td>
+                  <td>{getPrice(item.price * item.qty)}</td>
                   <td></td>
                 </tr>
               ))}
             </tbody>
+            <tfoot>
+              <tr>
+                <td colSpan={4}>Total</td>
+                <td>{ getPrice(totalPrice) }</td>
+              </tr>
+            </tfoot>
           </table>
 
           {state.cart && (

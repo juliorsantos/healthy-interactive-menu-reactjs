@@ -8,11 +8,17 @@ const Header = () => {
   const [state, dispatch] = useContext(Context);
 
   const getAppLang = () => {
-    if (!state.app.language) {
+    if (!state.app.locale) {
       return 'Select your location';
     }
 
-    return LANGS.filter(item => item.sign === state.app.language)[0].name;
+    const checkLang = LANGS.filter(item => item.sign === state.app.locale.sign);
+
+    if (!checkLang[0]) {
+      return 'Select your location';
+    }
+
+    return checkLang[0].name;
   }
 
   const setAppLang = (lang) => {
@@ -21,7 +27,7 @@ const Header = () => {
   }
 
   const getCartCount = () => {
-    if(!state.cart.length) return 0;
+    if (!state.cart.length) return 0;
 
     return state.cart.reduce((prev, curr) => prev + curr.qty, 0);
   }
@@ -37,7 +43,7 @@ const Header = () => {
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link to="/cart" className="nav-link">
-              🛒 <span className="cart-count">{ getCartCount() }</span>
+              🛒 <span className="cart-count">{getCartCount()}</span>
             </Link>
           </li>
           <li className="nav-item dropdown">
@@ -48,7 +54,7 @@ const Header = () => {
               {LANGS.map((item, key) => (
                 <li key={key}>
                   <a
-                    onClick={() => setAppLang(item.sign)}
+                    onClick={() => setAppLang(item)}
                     className="dropdown-item"
                     href="#">{item.name}</a>
                 </li>

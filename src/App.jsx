@@ -1,4 +1,4 @@
-import { useContext, useReducer } from 'react';
+import { useContext, useEffect, useReducer } from 'react';
 import { BrowserRouter, Router, Route, Routes } from 'react-router-dom';
 
 import AppReducer from './reducers/AppReducer';
@@ -8,7 +8,7 @@ import Index from './pages/Index';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
 
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css'
 
 const App = () => {

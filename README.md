@@ -1,7 +1,22 @@
 # GoodFood - Your health food online
 You can order your healthy food :)
 
-Technologies:
+I recommend that you use `json-server` to provide you a backend.
+
+First, clone this project.
+
+Run the npm
+`npm install`
+
+Run the server (same directory)
+~ Do not forget to copy databases `cp ./public/db.example.json ./public/db.json`
+Then run...
+`json-server --watch ./public/db.json --watch --port 8080`
+
+Then run the dev server
+`npm run dev`
+
+## Technologies
 - ViteJS
   - ReactJS
     - ContextAPI
@@ -14,7 +29,10 @@ Technologies:
   - React Toastify
   - Bootstrap 5
 
-### Maybe in the future
-- I will add API actions for CRUD (Now, it's a simple project)
-- Currency API for converting the prices
-- WhatsApp or Telegram sending
+### Todos
+- [x] Improve the frontend
+- [x] Add ContextAPI and Reducers
+- [x] Multiple and single pages for product showing
+- [ ] Add API actions for CRUD (JSON SERVER)
+- [ ] Currency API for converting the prices
+- [ ] WhatsApp or Telegram 

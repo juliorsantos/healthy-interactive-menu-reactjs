@@ -35,6 +35,8 @@ const reducers = (state, action) => {
       }
 
       return { ...state, cart: newCartList };
+    case 'SET_PRODUCTS':
+      return { ...state, products: action.payload };
     case 'ORDER':
       state.cart = [];
       return { ...state }

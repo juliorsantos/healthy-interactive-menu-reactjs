@@ -1,35 +1,34 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import axiosApi from "../lib/Api";
 
 import Header from './../components/Header';
 
-import ProductList from './../../public/foods.json';
-
 const Product = () => {
 
-  const param = useParams();
+  const params = useParams();
   const navigator = useNavigate();
 
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    if (!param.id) {
+    if (!params.id) {
       navigator('/', { replace: true });
     }
 
-    /**
-     * Get the product
-     */
-    const getProduct = ProductList.filter(item => item.id == param.id);
+    axiosApi.get('/products/' + params.id)
+    .then(res => {
+      if(!res.data) {
+        toast.error('Sorry. We can\'t search this food.')
+        return;
+      }
 
-    if (!getProduct.length) {
-      navigator('/');
-    }
-
-    /**
-     * Then set the product
-     */
-    setProduct(getProduct[0])
+      setProduct(res.data);
+    })
+    .catch(err => {
+      toast.error('Sorry. We can\'t search this food. [Internal Error]')
+    })
   }, []);
 
   return (
